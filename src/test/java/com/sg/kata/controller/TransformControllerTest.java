@@ -8,14 +8,14 @@ import org.springframework.http.ResponseEntity;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TranformControllerTest {
+class TransformControllerTest {
 
     @Test
     void should_ReturnSuccess_When_TransformIsDone() {
         TransformService ts = new TransformService();
-        TranformController trController = new TranformController(ts);
+        TransformController trController = new TransformController(ts);
 
-        ResponseEntity responseEntity = trController.transform(1);
+        ResponseEntity<String> responseEntity = trController.transform(1);
 
         assertEquals(200, responseEntity.getStatusCode().value());
     }
@@ -24,9 +24,9 @@ class TranformControllerTest {
     @CsvSource({"-1", "101"})
     public void should_ReturnBadRequest_When_WrongParamProvided(Integer num){
 
-        TranformController trController = new TranformController(null);
+        TransformController trController = new TransformController(null);
 
-        ResponseEntity responseEntity = trController.transform(num);
+        ResponseEntity<String> responseEntity = trController.transform(num);
 
         assertEquals(400, responseEntity.getStatusCode().value());
     }
@@ -34,9 +34,9 @@ class TranformControllerTest {
     @Test
     public void should_ReturnBadRequest_When_WrongNullParamProvided(){
 
-        TranformController trController = new TranformController(null);
+        TransformController trController = new TransformController(null);
 
-        ResponseEntity responseEntity = trController.transform(null);
+        ResponseEntity<String> responseEntity = trController.transform(null);
 
         assertEquals(400, responseEntity.getStatusCode().value());
     }
